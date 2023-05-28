@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_22_184458) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_23_155326) do
   create_table "friendships", force: :cascade do |t|
     t.string "user_username"
     t.integer "friend_id"
@@ -18,12 +18,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_22_184458) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "notes", force: :cascade do |t|
-    t.string "title"
-    t.string "topic"
-    t.string "reference"
-    t.string "picture"
-    t.text "description"
+# Could not dump table "notes" because of following StandardError
+#   Unknown type 'file' for column 'photo'
+
+  create_table "roles", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -38,6 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_22_184458) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

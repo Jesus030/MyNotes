@@ -7,3 +7,4 @@
 <div>
   <%= link_to "Back to notes", notes_path %>
 </div>
+<%= link_to "Log out", destroy_user_session_path, class: 'nav-link', data: {turbo_method: :delete} %>

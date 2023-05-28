@@ -4,3 +4,4 @@
 
     
 <%= link_to 'Create new user', notes_path %>
+<%= link_to "Log out", destroy_user_session_path, class: 'nav-link', data: {turbo_method: :delete} %>
