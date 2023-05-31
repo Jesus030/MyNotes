@@ -57,6 +57,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def add_friend(friend)
+    Friendship.create(User:self, friend:friend)
+
+  end
+
+  def friends
+    User.joins(:friendships).where("friendships.friend_id=? AND friendships.status='accepted'",self.id)
+  end 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

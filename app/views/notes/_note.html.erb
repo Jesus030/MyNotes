@@ -16,7 +16,11 @@
 
   <p>
     <strong>Picture:</strong>
-    <%= image_tag @note.picture  if @note.picture.attached? %>
+     <%= form_for @note, html: {multipart: true} do |f| %>
+<%= f.file_field :image %>
+<%= f.text_field :remote_image_url, placeholder: 'or image url' %>
+<%= f.submit %>
+<% end %>
   </p>
 
   <p>

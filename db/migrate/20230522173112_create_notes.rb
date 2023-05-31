@@ -4,9 +4,9 @@ class CreateNotes < ActiveRecord::Migration[7.0]
       t.string :title
       t.string :topic
       t.string :reference
-      t.file_field :picture
+      t.string :image
       t.text :description
-
+      t.string :remote_image_url
       t.timestamps
     end
   end

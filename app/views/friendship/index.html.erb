@@ -37,7 +37,15 @@
 </ul>
 
 
-<%= render @user %>
+<%= form_tag add_friend_path, method: :get do%>
+<%= text_field_tag :search, nil, placeholder: "Look friends"%>
+<%= submit_tag "Look"%>
+<% end %>
+
+<%= form_for @friendships do |f| %>
+<%= f.hidden_field :friend_id, value: @friend.id%>
+<%= f.submit "Look"%>
+<% end %>
 
 <div>
   <%= link_to "Edit this user", edit_user_path(@user) %> |

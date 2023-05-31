@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   resources :users
   resources :notes
  #map.resources :friendships
-  root 'dashboard#index'
 
   devise_scope :user do
     authenticated :user do
