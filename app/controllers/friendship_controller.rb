@@ -13,7 +13,24 @@ class FriendshipController < ApplicationController
     def destroy
         @friendship = current_user.friendships.find(params[:id])
         @friendship.destroy
-        flash[:notice] = "Removed friendship."
-        redirect_to current_user
-       end   
+
+
+        respond_to do |format|
+          format.html { redirect_to friends_url, notice: "Friend was successfully destroyed." }
+          format.json { head :no_content }
+        end        
+        redirect_to current_user 
+      end   
+
+       private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_friend
+      @friend = Friend.find(params[:id])
+    end
+
+    # Only allow a list of trusted parameters through.
+    def friend_params
+      params.require(:friend).permit(:email)
+    end
+       
 end

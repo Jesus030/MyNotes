@@ -1,14 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Users</h1>
-
+<% if current_user %>
 <div id="users">
   <% @users.each do |user| %>
     <%= render user %>
+   
     <p>
       <%= link_to "Show this user", user %>
+      <% if current_user.admin?%>
+       (<%= link_to "remove", user, :method => :delete %>)
+       <% end %>
     </p>
   <% end %>
 </div>
-
+<% end %>
 <%= link_to "New user", new_user_path %>

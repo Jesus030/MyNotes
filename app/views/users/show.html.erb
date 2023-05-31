@@ -1,8 +1,11 @@
 <p style="color: green"><%= notice %></p>
+ 
+
 
 <h2>Your Friends</h2>
 <ul>
   <% for user in @user.friends %>
+  
   <li><%= h user.username %></li>
   <% end %>  
 </ul>
@@ -19,19 +22,11 @@
 </ul>
 
 
-<h2>Users Who Have Befriended You</h2>
-<ul>
-  <% for user in @user.inverse_friends %>
-  <li><%= h user.username %></li>
-  <% end %>
-</ul>
 
-
-<%= render @user %>
+<%= render "form", user: @user %>
 
 <div>
   <%= link_to "Edit this user", edit_user_path(@user) %> |
   <%= link_to "Back to users", users_path %>
 
-  <%= button_to "Destroy this user", @user, method: :delete %>
 </div>

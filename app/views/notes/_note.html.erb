@@ -16,7 +16,7 @@
 
   <p>
     <strong>Picture:</strong>
-    <%= note.picture %>
+    <%= image_tag @note.picture  if @note.picture.attached? %>
   </p>
 
   <p>
