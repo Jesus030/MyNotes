@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
   resources :notes
- #map.resources :friendships
+  resources :image
+
+
+  get 'friendship/request'
+  get 'friendship/index'
 
   devise_scope :user do
     authenticated :user do

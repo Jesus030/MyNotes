@@ -15,7 +15,7 @@ class NotesTest < ApplicationSystemTestCase
     click_on "New note"
 
     fill_in "Description", with: @note.description
-    fill_in "Picture", with: @note.picture
+    fill_in "image", with: @note.image
     fill_in "Reference", with: @note.reference
     fill_in "Title", with: @note.title
     fill_in "Topic", with: @note.topic
@@ -30,7 +30,7 @@ class NotesTest < ApplicationSystemTestCase
     click_on "Edit this note", match: :first
 
     fill_in "Description", with: @note.description
-    fill_in "Picture", with: @note.picture
+    fill_in "Image", with: @note.image
     fill_in "Reference", with: @note.reference
     fill_in "Title", with: @note.title
     fill_in "Topic", with: @note.topic

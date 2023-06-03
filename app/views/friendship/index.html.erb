@@ -28,6 +28,15 @@
   <% end %>  
 </ul>
 
+<h2>Accept petition</h2>
+<ul>
+  <% from_for current_user, url 
+{action: :create_friendship, id: @user.id} do |f| %>
+<%= f.email_field :email, placeholder: 'Enter friend email' %>
+<%= f.submit 'Send friend request'%>
+  <% end %>
+</ul>
+
 
 <h2>Users Who Have Befriended You</h2>
 <ul>

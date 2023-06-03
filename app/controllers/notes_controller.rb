@@ -4,6 +4,7 @@ class NotesController < ApplicationController
   # GET /notes or /notes.json
   def index
     @notes = Note.all
+   
   end
 
   # GET /notes/1 or /notes/1.json
@@ -36,11 +37,14 @@ class NotesController < ApplicationController
 
   # PATCH/PUT /notes/1 or /notes/1.json
   def update
+   
     respond_to do |format|
       if @note.update(note_params)
+        @note.image_will_change!
         format.html { redirect_to note_url(@note), notice: "Note was successfully updated." }
         format.json { render :show, status: :ok, location: @note }
       else
+        @note.image_will_change!
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @note.errors, status: :unprocessable_entity }
       end
@@ -65,6 +69,6 @@ class NotesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def note_params
-      params.require(:note).permit(:title, :topic, :reference, :image,  :remote_image_url, :description)
+      params.require(:note).permit(:title, :topic, :reference, :image, :remote_image_url, :description)
     end
 end

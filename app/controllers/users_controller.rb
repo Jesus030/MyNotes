@@ -8,6 +8,9 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
+    #show friend
+    @user=User.find(params[:id])
+    @friends=@user.friends
   end
 
   # GET /users/new
@@ -19,6 +22,17 @@ class UsersController < ApplicationController
   def edit
   end
 
+def create_friendshid
+@user=User.find(params[:id])
+current_user.send_friend_request(@user)
+redirect_to @user
+
+end
+
+def send_friend_request(user)
+  friends.create(friend: user) unless is_friend?
+  (user) || has_pending_request?(user)
+end
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
@@ -58,9 +72,33 @@ class UsersController < ApplicationController
   end
 
   def add_friend(friend)
-    Friendship.create(User:self, friend:friend)
+ #   Friendship.create(User:self, friend:friend)
+@user=User.find(params[:id])
+friend=User.find(params[:friend_id])
+@user.add_friend(friend)
 
+redirect_to user_path(@user)
   end
+
+#def remove_friend.user= User.find(params[:id])
+#friend=User.find(params[:id])
+#@user.remove_friend(friend)
+
+#redirect_to user_path(@user)
+
+#end
+
+
+def proccess_friend_request
+friendship= Friendship.find_by(user_id: params[:user_id], friend_id: params[:friend_id])
+if params[:accept]
+  friendship.update(status: 'accepted')
+elsif params[:reject]
+  friendship.update(statues: 'rejected')
+end
+redirectback(fallback_location: root_path)
+
+end
 
   def friends
     User.joins(:friendships).where("friendships.friend_id=? AND friendships.status='accepted'",self.id)

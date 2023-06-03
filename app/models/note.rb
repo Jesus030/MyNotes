@@ -1,9 +1,9 @@
 class Note < ApplicationRecord
-    #attr_accesible :picture, :reference
+    #attr_accesible :image, :reference
     mount_uploader :image, ImageUploader
     attr_accessor :remote_image_url
-    # has_one_attached :picture
-   # has_many_attached :picture as :imageable do |attachable|
+    #has_one :image
+   # has_many_attached :image as :imageable do |attachable|
    #     attachable.variant :thumb, resize_to_limit: [100, 100]
    # end 
     #after_save :save_picture 

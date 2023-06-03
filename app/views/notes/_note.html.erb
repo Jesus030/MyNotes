@@ -15,12 +15,10 @@
   </p>
 
   <p>
-    <strong>Picture:</strong>
-     <%= form_for @note, html: {multipart: true} do |f| %>
-<%= f.file_field :image %>
-<%= f.text_field :remote_image_url, placeholder: 'or image url' %>
-<%= f.submit %>
-<% end %>
+    <strong>Image:</strong>
+   
+<%= note.text_field :image %>
+
   </p>
 
   <p>

@@ -22,4 +22,13 @@ end
  def set_default_role
   self.role ||= :user
  end
+
+def add_friend(friend)
+  friends << friend
+end
+
+def remove_friend(friend)
+  friendship= friendships.find_by(friend_id: friend.id)
+  friendship.destroy if friendship
+end
 end

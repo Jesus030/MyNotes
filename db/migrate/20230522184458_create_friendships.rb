@@ -3,7 +3,7 @@ class CreateFriendships < ActiveRecord::Migration[7.0]
     create_table :friendships do |t|
       t.string :user_username
       t.integer :friend_id
-
+      t.integer :status
       t.timestamps
     end
   end
