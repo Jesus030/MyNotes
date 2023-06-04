@@ -1,5 +1,12 @@
 class FriendshipController < ApplicationController
-    def create
+def index
+  @users = User.all
+  @pending_friendships =current_user.pending_friends
+  @accepted_friendships= current_user.friends
+end
+
+  def create
+    friend = User.find(params[:friend_id])
         @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
         if @friendship.save
           flash[:notice] = "Added friend."
@@ -9,6 +16,15 @@ class FriendshipController < ApplicationController
           redirect_to root_url
         end
     end  
+
+def accept
+  friendship= Friendship.find(params[:id])
+  friendship.update(status: "accepted")
+  current_user.friends << friendship.user_id
+  flash[:notice] = "Accept"
+  redirect_to friendships_path
+end
+
 
     def destroy
         @friendship = current_user.friendships.find(params[:id])

@@ -16,8 +16,8 @@
 
   <p>
     <strong>Image:</strong>
-   
-<%= note.text_field :image %>
+    <%= image_tag @note.image  if @note.image.present? %>
+
 
   </p>
 

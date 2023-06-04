@@ -1,0 +1,24 @@
+<%= form_with(model: collection_note) do |form| %>
+  <% if collection_note.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(collection_note.errors.count, "error") %> prohibited this collection_note from being saved:</h2>
+
+      <ul>
+        <% collection_note.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="form-inputs">
+    <%= form.association :user, :collection %>
+    <%= form.association :book %>
+  </div>
+
+  <div class="form-actions">
+    <%= form.button :submit, :class=> 'btn btn-warning'%>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

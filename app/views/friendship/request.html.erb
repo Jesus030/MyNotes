@@ -1,7 +1,7 @@
 <h1>Your Friend choose to take</h1>
 <% if @pending_request.any? %>
   <ul class="list-group">
-  <% 2pending_requests.each do |request| %>
+  <% pending_requests.each do |request| %>
   <li class="list-group-item">
   <%= request.friend.name %> tienes solciitud
     <% link_to "Accept", proccess_friend_request_path(user_id: request.friend_id, friend_id: request.user_id, accept:true), method: :post, class: "btn btn-danger btn-sm float-right mr-2" %>
