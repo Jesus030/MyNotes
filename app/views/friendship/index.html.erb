@@ -1,4 +1,17 @@
-<h1>Your Friend choose to take</h1>
+<h2>Your Friends</h2>
+<% if user.friends? %>
+<ul>
+  <% for user in @user.friends %>
+  <li><%= h user.Username %></li>
+  <% end %>  
+<% else %>
+<p> dont have friends </p>
+<% end %>
+</ul>
+
+
+
+<h1>choose to take</h1>
 <% @users.each do |user| %>
   <div class="user">
     <p>
@@ -6,35 +19,43 @@
       <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %>
       <div class="clear"></div>
     </p>
+    <%= user.Username %>
+    <% if current_user!= user && !current_user.friends.include?(user) %>
+    <% if current_user.pending_friends.include?(user) %>
+      <%= button_to "send request", send_friend_request_user_path(user), method: :post %>
+    <% end %>
+    <% else %>
+      <%= button_to "delete friend", "#", disabled: true%>
+    <% end %>
+  <% end %>
   </div>
-
-
-
-<h2>Your Friends</h2>
-<ul>
-  <% for user in @user.friend_id %>
-  <li><%= h user.Username %></li>
-  <% end %>  
-</ul>
-
 
 <h2>Your Friends, choose what you want to delete</h2>
 <ul>
-  <% for friendship in @user.friendships %>
+<% if user.friend_id? %>
+  <% for friendships in @user.friendships %>
   <li>
     <%= h friendship.friend.Username %>
     (<%= link_to "remove", friendship, :method => :delete %>)
   </li>
-  <% end %>  
+    <% end %>  
+<% else %>
+<p> dont have friends </p>
+<% end %>
 </ul>
 
 
 
 <h2>Users Who Have Befriended You</h2>
 <ul>
+
   <% for user in @user.inverse_friends %>
   <li><%= h user.username %></li>
   <% end %>
+ <% if friendships.inverse_friend? %>
+<% else %>
+<p> nobody wants to be your friend </p>
+<% end %>
 </ul>
 
 
@@ -49,19 +70,6 @@
 <% end %>
 
 
-<% @user.each do |user| %>
-<p>
-<%= user.name %>
-<% if current_user!= user && !current_user.friends.include?(user) %>
-<% if current_user.pending_friends.include?(user) %>
-<%= button_to "send request", send_friend_request_user_path(user), method: :post %>
-<% end %>
-<% else %>
-<%= button_to "delete friend", "#", disabled: true%>
-<% end %>
-</p>
-
-<% end %>
 
 <h2>Pending</h2>
 <% if @pending_friendships.present? %>
@@ -90,7 +98,6 @@
 <% else %>
 <p> dont have friends </p>
   <% end %> 
-<% end %>
 
 <div>
   <%= link_to "Edit this user", edit_user_path(@user) %> |

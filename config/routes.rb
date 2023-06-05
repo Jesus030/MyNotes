@@ -10,10 +10,9 @@ Rails.application.routes.draw do
     resources :notes
   resources :image
 
-
   get 'friendship/request', as: :friend
   post 'friendship/index',  as: :friendships
-
+  get '/friendship/index', to: 'friendship#index'
 
   devise_scope :user do
     authenticated :user do

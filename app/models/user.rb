@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :friendships
+  has_many :friendships, dependent: :destroy
   has_many :friends, :through => :friendships
   has_many :inverse_friendships, class_name: "Friendship", foreign_key: "friend_id"
   has_many :inverse_friends,  :through => :inverse_friendships, source: :user
@@ -10,9 +10,13 @@ class User < ApplicationRecord
 
  # enum role:[:user, :admin]
 def pending_friends
-inverse_friendships.pending.map(&:user)
+  inverse_friendships.pending.map(&:user)
 end
- def admin?
+def all_friends
+    friends + inverse_friends  
+end
+
+def admin?
   self.role == "admin"
 end
 
