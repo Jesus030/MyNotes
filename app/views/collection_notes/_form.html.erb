@@ -2,22 +2,20 @@
   <% if collection_note.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(collection_note.errors.count, "error") %> prohibited this collection_note from being saved:</h2>
-
+    <% end %>  
       <ul>
         <% collection_note.errors.each do |error| %>
           <li><%= error.full_message %></li>
-        <% end %>
       </ul>
     </div>
-  <% end %>
-<div class="form-inputs">
-    <%= form.association :user, :collection %>
-    <%= form.association :book %>
+  <div>
+  
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
   </div>
 
-  <div class="form-actions">
-    <%= form.button :submit, :class=> 'btn btn-warning'%>
-  </div>
+ 
   <div>
     <%= form.submit %>
   </div>

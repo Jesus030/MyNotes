@@ -1,6 +1,6 @@
 class CollectionNotesController < ApplicationController
   before_action :set_collection_note, only: %i[ show edit update destroy ]
-  before_filter :authenticate_user!
+  #before_filter :authenticate_user!
   # GET /collection_notes or /collection_notes.json
   def index
     @collection_notes = CollectionNote.all
@@ -70,13 +70,13 @@ class CollectionNotesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_collection_note
       @collection_note = CollectionNote.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def collection_note_params
-      params.fetch(:collection_note, {})
+      params.require(:note).permit(:title, :topic)
     end
+
+
 end

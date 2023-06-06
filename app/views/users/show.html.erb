@@ -7,11 +7,11 @@
 <div>
   <%= link_to "Edit this user", edit_user_path(@user) %> |
   <%= link_to "Back to users", users_path %>
-<% if current_user.admin?%>      
+<% if current_user.admin? && (@user.id != current_user.id) %>      
   <%= button_to "Destroy this user", @user, method: :delete %>
    <% end %>
    <%= button_to "See friends", friendships_path(@user)  %>
 </div>
-
+<%= link_to "New collection note", collection_note_path(@user) %>
 
 <%= button_to "logout", destroy_user_session_path, method: :delete  %>

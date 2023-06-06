@@ -16,9 +16,9 @@
 
   <p>
     <strong>Image:</strong>
-    <%= image_tag @note.image  if @note.image.present? %>
-
-
+    <% if note.image? %>
+      <%= image_tag url_for(note.image.url) %>
+    <% end %>
   </p>
 
   <p>

@@ -2,7 +2,6 @@
   <% if note.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(note.errors.count, "error") %> prohibited this note from being saved:</h2>
-
       <ul>
         <% note.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,7 +9,7 @@
       </ul>
     </div>
   <% end %>
-
+  <%= form.hidden_field :User_id, value: current_user.id %>
   <div>
     <%= form.label :title, style: "display: block" %>
     <%= form.text_field :title %>
@@ -28,15 +27,10 @@
 
   <div>
     <%= form.label :image, style: "display: block" %>
-
-
-<%= form.file_field :image %>
-
-
+    <%= form.file_field :image %>
   </div>
 
   <div>
-
     <%= form.label :description, style: "display: block" %>
     <%= form.text_area :description %>
   </div>

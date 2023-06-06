@@ -7,6 +7,12 @@ gem "devise"
 
 gem "carrierwave"
 
+gem 'mini_magick', '~> 4.11'
+
+gem 'fog-aws'
+
+gem 'activestorage'
+
 gem "image_processing", ">= 1.2"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"

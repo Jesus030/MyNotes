@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
   resources :collection_notes
-
+  resources :notes
+  resources :image
+  
   devise_for :users
   resources :users do 
     member do
       post :send_friend_request
     end
   end
-    resources :notes
-  resources :image
+    
 
   get 'friendship/request', as: :friend
   post 'friendship/index',  as: :friendships

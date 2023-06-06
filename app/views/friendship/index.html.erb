@@ -1,107 +1,113 @@
-<h2>Your Friends</h2>
-<% if user.friends? %>
-<ul>
-  <% for user in @user.friends %>
-  <li><%= h user.Username %></li>
-  <% end %>  
-<% else %>
-<p> dont have friends </p>
-<% end %>
-</ul>
+<h1>Friends page</h1>
+  <% if current_user.user?%> 
+    <h2>Your Friends</h2>
+      <% @users.each do |user| %>
+        <% if current_user.id == user.friend_id %>
+        <ul>
+          <% for user in @user.friends %>
+           <li><%= h user.Username %></li>
+          <% end %>  
+        <% end %>
+        </ul>
+      <% end %>
 
-
-
-<h1>choose to take</h1>
-<% @users.each do |user| %>
-  <div class="user">
-    <p>
+  <h2>Possible friends to take, choose user to send a request</h2>
+    <% @users.each do |user| %>
+      <div class="user">
+      <p>
       <strong><%=h user.Username %></strong>
       <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %>
       <div class="clear"></div>
-    </p>
-    <%= user.Username %>
-    <% if current_user!= user && !current_user.friends.include?(user) %>
-    <% if current_user.pending_friends.include?(user) %>
-      <%= button_to "send request", send_friend_request_user_path(user), method: :post %>
-    <% end %>
-    <% else %>
-      <%= button_to "delete friend", "#", disabled: true%>
-    <% end %>
-  <% end %>
-  </div>
+      </p>
+      <% if current_user!= user && !current_user.friends.include?(user) %>
+        <% if current_user.pending_friends.include?(user) %>
+          <%= button_to "send request", send_friend_request_user_path(user), method: :post %>
+        <% end %>
+        <% else %>
+          <%= button_to "delete friend", "#", disabled: true%>
+        <% end %>
+      <% end %>
+      </div>
 
-<h2>Your Friends, choose what you want to delete</h2>
-<ul>
-<% if user.friend_id? %>
-  <% for friendships in @user.friendships %>
-  <li>
+
+  <h2>Your Friends, choose what you want to delete</h2>
+  <ul>
+  <% if current_user.friend_id? %>
+    <% for friendships in @user.friendships %>
+    <li>
     <%= h friendship.friend.Username %>
     (<%= link_to "remove", friendship, :method => :delete %>)
-  </li>
+    </li>
     <% end %>  
-<% else %>
-<p> dont have friends </p>
-<% end %>
-</ul>
-
-
-
-<h2>Users Who Have Befriended You</h2>
-<ul>
-
-  <% for user in @user.inverse_friends %>
-  <li><%= h user.username %></li>
+  <% else %>
+    <p> dont have friends </p>
   <% end %>
- <% if friendships.inverse_friend? %>
-<% else %>
-<p> nobody wants to be your friend </p>
-<% end %>
-</ul>
-
-
-<%= form_tag add_friend_path, method: :get do%>
-<%= text_field_tag :search, nil, placeholder: "Look friends"%>
-<%= submit_tag "Look"%>
-<% end %>
-
-<%= form_for @friendships do |f| %>
-<%= f.hidden_field :friend_id, value: @friend.id%>
-<%= f.submit "Look"%>
-<% end %>
+  </ul>
 
 
 
-<h2>Pending</h2>
-<% if @pending_friendships.present? %>
-<ul>
-<% @pendging_friendships.each do |friendship| %>
-<li>
-<%= friendship.user.name %> want to agregate as a friend
-<%= button_to "accept", accept_friendship_path(friendship),method: :patch %>
-</li>
-<% end %>
-</ul>
-<% else %>
-<p>dont have solicitud</p>
-<%end %>
-
-
-
-<h2>Your Friends</h2>
-<ul>
-  <% if @accepted_friendships.present?  %>
+  <h2>Users Who Have Befriended You</h2>
   <ul>
- <% @accepted_friendships.each do |friendship|%>
-<li> <%= friendship.friend.name%> </li>
-<% end %>
-</ul>
-<% else %>
-<p> dont have friends </p>
-  <% end %> 
+  <% if @user && @user.inverse_friends? %>
+    <% for user in @user.inverse_friends %>
+      <li><%= h user.Username %></li>
+    <% end %>
+  <% if friendships.inverse_friend? %>
+    <li><%= h user.Username %></li>
+  <% else %>
+  <% end %>
+    <p> nobody wants to be your friend </p>
+  <% end %>
+  </ul>
 
-<div>
-  <%= link_to "Edit this user", edit_user_path(@user) %> |
-  <%= link_to "Back to users", users_path %>
 
-  <%= button_to "Destroy this user", @user, method: :delete %>
+
+
+
+
+  <h2>Pending</h2>
+  <% if @pending_friendships.present? %>
+    <ul>
+    <% @pendging_friendships.each do |friendship| %>
+    <li>
+    <%= friendship.user.name %> want to agregate as a friend
+    <%= button_to "accept", accept_friendship_path(friendship),method: :patch %>
+    </li>
+    </ul>
+  <% end %>
+  <% else %>
+    <p>dont have solicitud</p>
+  <%end %>
+
+
+
+  <h2>Persons who wants to be your friends</h2>
+  <ul>
+    <% if @accepted_friendships.present?  %>
+      <% @accepted_friendships.each do |friendship|%>
+      <li> <%= friendship.friend.name%> </li>
+    <% end %>
+  </ul>
+    <% else %>
+      <p> dont have friends </p>
+    <% end %> 
+  <div>
+  <% end %>
+   <% if current_user.admin?%> 
+      <h2>welcome admin, choose friends to delete</h2>
+      <ul>
+      <% @users.each do |user| %>
+      <% if user.friend_id? %>
+        <% for friendships in @user.friendships %>
+          <li>
+          <%= h friendship.friend.Username %>
+          (<%= link_to "remove", friendship, :method => :delete %>)
+          </li>
+        <% end %>  
+      <% end %>
+      </ul>
+    <% end%>
+  <% end%>
+<%= link_to "Back to users", users_path %>
 </div>
+

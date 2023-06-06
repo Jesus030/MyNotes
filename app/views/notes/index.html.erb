@@ -1,7 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Notes</h1>
-
+<% if current_user.admin?%> 
 <div id="notes">
   <% @notes.each do |note| %>
     <%= render note %>
@@ -9,8 +9,18 @@
       <%= link_to "Show this note", note %>
     </p>
   <% end %>
-</div>
+  <% else %>
+<div id="notes">
+   <% @notes.each do |note| %>
+    <% if current_user.id == note.User%>
+      <%= render note %>
+      <%= link_to "Edits user", edit_user_path(user) %>
+    <% end %>
+  <% end %>
+ <% end %>
 
+</div>
+<%= link_to "notes", collection_notes_path %>
 <%= link_to "New note", new_note_path %>
 <%= link_to "User", users_path %>
 <%= link_to "Log out", destroy_user_session_path, class: 'nav-link', data: {turbo_method: :delete} %>
