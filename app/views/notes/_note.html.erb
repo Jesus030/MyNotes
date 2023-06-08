@@ -10,11 +10,6 @@
   </p>
 
   <p>
-    <strong>Reference:</strong>
-    <%= note.reference %>
-  </p>
-
-  <p>
     <strong>Image:</strong>
     <% if note.image? %>
       <%= image_tag url_for(note.image.url) %>

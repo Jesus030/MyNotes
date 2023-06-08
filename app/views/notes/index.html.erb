@@ -12,7 +12,7 @@
   <% else %>
 <div id="notes">
    <% @notes.each do |note| %>
-    <% if current_user.id == note.User%>
+    <% if current_user.id == note.user%>
       <%= render note %>
       <%= link_to "Edits user", edit_user_path(user) %>
     <% end %>

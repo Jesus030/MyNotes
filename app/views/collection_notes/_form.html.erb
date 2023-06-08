@@ -7,6 +7,7 @@
         <% collection_note.errors.each do |error| %>
           <li><%= error.full_message %></li>
       </ul>
+    <% end %>
     </div>
   <div>
   
@@ -15,7 +16,16 @@
     <%= form.text_field :title %>
   </div>
 
- 
+ <h2>Select notes</h2>
+
+  <%= form.fields_for :notes do |note_fields| %>
+    <p>
+    <%= note_fields.label :categoria %><br>
+    <%= note_fields.collection_select(:note, @note, :note_id, :topic) %>
+  </p>
+  <% end %>
+
+
   <div>
     <%= form.submit %>
   </div>

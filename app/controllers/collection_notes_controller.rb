@@ -1,5 +1,5 @@
 class CollectionNotesController < ApplicationController
-  before_action :set_collection_note, only: %i[ show edit update destroy ]
+  #before_action :set_collection_note, only: %i[ show edit update destroy ]
   #before_filter :authenticate_user!
   # GET /collection_notes or /collection_notes.json
   def index
@@ -24,6 +24,7 @@ class CollectionNotesController < ApplicationController
   # GET /collection_notes/new
   def new
     @collection_note = CollectionNote.new
+    #@collection_note.notes.build
   end
 
   # GET /collection_notes/1/edit
@@ -75,7 +76,7 @@ class CollectionNotesController < ApplicationController
     end
 
     def collection_note_params
-      params.require(:note).permit(:title, :topic)
+      params.require(:collection).permit(:title, :topic, notes_attributes: [:title, :topic, :description])
     end
 
 

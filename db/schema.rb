@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_06_102147) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_08_224937) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -43,6 +43,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_102147) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "topic"
+    t.integer "user_id", null: false
+    t.integer "note_id", null: false
+    t.index ["note_id"], name: "index_collection_notes_on_note_id"
+    t.index ["user_id"], name: "index_collection_notes_on_user_id"
   end
 
   create_table "friends", force: :cascade do |t|
@@ -84,11 +89,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_102147) do
   create_table "notes", force: :cascade do |t|
     t.string "title"
     t.string "topic"
-    t.string "reference"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image"
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
+  create_table "relation_notes_collections", force: :cascade do |t|
+    t.integer "note_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["note_id"], name: "index_relation_notes_collections_on_note_id"
+    t.index ["user_id"], name: "index_relation_notes_collections_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -115,5 +130,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_102147) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "collection_notes", "notes"
+  add_foreign_key "collection_notes", "users"
+  add_foreign_key "notes", "users"
+  add_foreign_key "relation_notes_collections", "notes"
+  add_foreign_key "relation_notes_collections", "users"
   add_foreign_key "users", "friends"
 end

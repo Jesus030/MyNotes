@@ -8,7 +8,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :notes
-  has_many :collection_notes
+  has_many :relation_notes_collection
+  has_many :notes, through: :relation_notes_collection
+  
 
  # enum role:[:user, :admin]
 def pending_friends
