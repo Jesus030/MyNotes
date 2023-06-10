@@ -9,23 +9,19 @@
       </ul>
     <% end %>
     </div>
-  <div>
-  
-  <div>
+   <div>
     <%= form.label :title, style: "display: block" %>
     <%= form.text_field :title %>
   </div>
 
- <h2>Select notes</h2>
+  <div>
+    <%= form.label :topic, style: "display: block" %>
+    <%= form.text_field :topic %>
+  </div>
 
-  <%= form.fields_for :notes do |note_fields| %>
-    <p>
-    <%= note_fields.label :categoria %><br>
-    <%= note_fields.collection_select(:note, @note, :note_id, :topic) %>
-  </p>
-  <% end %>
-
-
+   <%= form.hidden_field :user_id, value: current_user.id %>
+    <%= form.hidden_field :Username, value: current_user.Username %>
+ 
   <div>
     <%= form.submit %>
   </div>

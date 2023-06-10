@@ -1,24 +1,21 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Notes</h1>
-<% if current_user.admin?%> 
+
 <div id="notes">
   <% @notes.each do |note| %>
+  <% if current_user.admin? || current_user.id == note.user_id%> 
     <%= render note %>
     <p>
       <%= link_to "Show this note", note %>
     </p>
   <% end %>
-  <% else %>
-<div id="notes">
-   <% @notes.each do |note| %>
-    <% if current_user.id == note.user%>
+    <% @notes.each do |note| %>
+    <% if current_user.friend_id == note.user_id && note.share? %>
       <%= render note %>
-      <%= link_to "Edits user", edit_user_path(user) %>
     <% end %>
-  <% end %>
  <% end %>
-
+ <% end %>
 </div>
 <%= link_to "notes", collection_notes_path %>
 <%= link_to "New note", new_note_path %>

@@ -12,12 +12,12 @@
   <%= form.hidden_field :user_id, value: current_user.id %>
   <div>
     <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title%>
+    <%= form.text_field :title %>
   </div>
 
   <div>
     <%= form.label :topic, style: "display: block" %>
-    <%= form.text_field :topic %>
+     <%= form.select :topic, [["Homework","Homework"], ["Shop","Shop"],["Sports","Sports"],["University","University"]], selected: "University" %>
   </div>
 
   <div>
@@ -28,6 +28,12 @@
   <div>
     <%= form.label :description, style: "display: block" %>
     <%= form.text_area :description %>
+  </div>
+
+  
+  <div>
+    <%= form.label :share, style: "display: block" %>
+    <%= form.select :share, [["Yes","True"], ["No","False"]], selected: "Yes" %>
   </div>
 
   <div>

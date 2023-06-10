@@ -3,12 +3,23 @@
 
   <p>
     <strong>Owner:</strong>
-    <%= user.Username %>
+    <%= collection_note.Username %>
   </p>
 
   <p>
     <strong>Title:</strong>
     <%= collection_note.title %>
   </p>
+
+ <p>
+    <strong>Topic:</strong>
+    <%= user.Topic %>
+  </p>
+
+<%= form_tag remove_from_collection_note_path(@note), method: :post do %>
+<%= select_tag :collection_id, options_from_collection_for_select(@note.collections, :id, :name) %>
+<%= submit_tag "Eliminar de la colección" %>
+<% end %>
+
 
 </div>
