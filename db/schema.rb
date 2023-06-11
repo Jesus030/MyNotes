@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_08_224937) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_11_093542) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -46,6 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_224937) do
     t.string "topic"
     t.integer "user_id", null: false
     t.integer "note_id", null: false
+    t.string "Username"
     t.index ["note_id"], name: "index_collection_notes_on_note_id"
     t.index ["user_id"], name: "index_collection_notes_on_user_id"
   end
@@ -94,6 +95,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_224937) do
     t.datetime "updated_at", null: false
     t.string "image"
     t.integer "user_id", null: false
+    t.boolean "share"
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
@@ -123,6 +125,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_224937) do
     t.datetime "remember_created_at"
     t.string "role"
     t.integer "friend_id"
+    t.string "authentication_token"
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_ip"
+    t.datetime "last_sign_in_ip"
+    t.integer "sign_in_count", default: 0
+    t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["friend_id"], name: "index_users_on_friend_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

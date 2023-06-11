@@ -1,15 +1,27 @@
 class CollectionNotesController < ApplicationController
   #before_action :set_collection_note, only: %i[ show edit update destroy ]
-  #before_filter :authenticate_user!
+  before_action :authenticate_user!
+ 
   # GET /collection_notes or /collection_notes.json
   def index
     @collection_notes = CollectionNote.all
-    @collection_notes = CollectionNote.where('user_id' => current_user.id)
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @Collection_notes }
-    end
+    #@collection_notes = CollectionNote.where('user_id' => current_user.id)
+    #respond_to do |format|
+    #  format.html # index.html.erb
+    #  format.json { render json: @Collection_notes }
+    #end
   end
+
+  def add_note
+    @notes = Note.all
+    @collection_notes = CollectionNote.new
+    @collection_note = Collection_note.find(params[:id])
+    @note = Note.find(params[:note_id])
+    @collection_note.notes << @note
+    
+    redirect_to @collection_note
+    end
+    
 
   # GET /collection_notes/1 or /collection_notes/1.json
   def show
@@ -35,7 +47,7 @@ class CollectionNotesController < ApplicationController
   # POST /collection_notes or /collection_notes.json
   def create
     @collection_note = CollectionNote.new(collection_note_params)
-
+    #@collection_note.user_id = current_user.id
     respond_to do |format|
       if @collection_note.save
         format.html { redirect_to collection_note_url(@collection_note), notice: "Collection note was successfully created." }
@@ -76,7 +88,7 @@ class CollectionNotesController < ApplicationController
     end
 
     def collection_note_params
-      params.require(:collection).permit(:title, :topic, notes_attributes: [:title, :topic, :description])
+      params.require(:collection_note).permit(:username, :user_id, :title, :topic)
     end
 
 

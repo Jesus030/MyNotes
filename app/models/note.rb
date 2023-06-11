@@ -1,5 +1,5 @@
 class Note < ApplicationRecord 
-    belongs_to :user
+    #belongs_to :user
     #belongs_to :collection_note
     mount_uploader :image, ImageUploader
     attr_accessor :remote_image_url

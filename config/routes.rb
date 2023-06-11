@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   resources :collection_notes
   resources :notes
   resources :image
-  
+  #devise_for :users, controllers: { sessions: 'custom_session' }
+
   devise_for :users
   resources :users do 
     member do
@@ -10,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
     
-
+  post 'collections/:id/add_note', to: 'collections#add_note', as: 'add_note_collection'
   get 'friendship/request', as: :friend
   post 'friendship/index',  as: :friendships
   get '/friendship/index', to: 'friendship#index'

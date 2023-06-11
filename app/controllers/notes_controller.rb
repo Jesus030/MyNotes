@@ -13,12 +13,20 @@ class NotesController < ApplicationController
   # GET /notes/new
   def new
     @note = Note.new
-    #@user = User.new
+    #@note.user_id = @user.id
   end
 
   # GET /notes/1/edit
   def edit
   end
+
+  def remove_from_collection
+    @collection_note = Collection_note.find(params[:collection_id])
+    @note = Note.find(params[:id])
+    @collection_note.notes.delete(@note)
+    
+    redirect_to @collection_note
+  end    
 
   # POST /notes or /notes.json
   def create
@@ -69,6 +77,6 @@ class NotesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def note_params
-      params.require(:note).permit(:title, :topic, :image, :remote_image_url, :description)
+      params.require(:note).permit(:user_id, :title, :topic, :image, :description)
     end
 end

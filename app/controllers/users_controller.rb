@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
-
+ 
+#  before_action :authenticate_user_from_token!
   # GET /users or /users.json
   def index
     @users = User.all
@@ -112,6 +113,26 @@ end
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:Username, :zip, :role)
+      params.require(:user).permit(:Username, :zip, :role, :token)
     end
-end
+
+
+    def authenticate_user_from_token!
+      user_email = params[:user_email].presence
+      user       = user_email && User.find_by_email(user_email)
+  
+      # Use Devise.secure_compare to compare the access_token
+      # in the database with the access_token given in the params.
+      if user && Devise.secure_compare(user.access_token, params[:access_token])
+  
+        # Passing store false, will not store the user in the session,
+        # so an access_token is needed for every request.
+        # If you want the access_token to work as a sign in token,
+        # you can simply remove store: false.
+        sign_in user, store: false
+      end
+    end
+
+    
+
+  end    

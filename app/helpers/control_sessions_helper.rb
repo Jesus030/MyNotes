@@ -1,0 +1,2 @@
+module ControlSessionsHelper
+end
