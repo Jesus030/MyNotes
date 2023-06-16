@@ -1,0 +1,37 @@
+ <%= render :template => 'dashboard/index' -%>
+<p style="color: green"><%= notice %></p>
+ <h1>List of Notes</h1>
+
+<table class="table table-striped table-bordered">
+  <thead class="thead-dark">
+  <thead>
+    <tr>
+      <th scope="col">User id</th>  
+      <th scope="col">Title</th>
+      <th scope="col">TOpic</th>
+      <th scope="col">Description</th>
+      <th scope="col">Image</th>
+      <th scope="col">Share</th>
+      <th scope="col">Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+     <% @notes.each do |note| %>
+     <% if note.user_id == current_user.id%>
+      <tr>
+        <td><%= note.user_id %></td>
+        <td><%= note.title %></td>
+        <td><%= note.topic %></td>
+        <td><%= note.description %></td>
+        <td><%= note.image %></td>
+        <td><%= note.share_id %></td>
+        <td><%= link_to "Edit this note",  edit_note_path(note) %>  </td>
+        <td><%= link_to "Show this note", note %>  </td>
+        <td><%= link_to "remove", note, :method => :delete, turbo_confirm: "Are you sure?"  %>
+     </td>
+      </tr>  
+    <% end %>
+<% end %>
+  </tbody>
+</table>
+<%= render :template => 'notes/back' -%>

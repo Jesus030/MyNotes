@@ -1,0 +1,31 @@
+<%= render :template => 'dashboard/index' -%>
+<p style="color: green"><%= notice %></p>
+
+<h1>Your friends</h1>
+  <% if current_user.friend_id?%> 
+    <h2>Your Friends</h2>
+      <% @users.each do |user| %>
+        <% if current_user.id == user.friend_id %>
+        <ul>
+          <% for user in @user.friends %>
+           <li><%= h user.Username %></li>
+          <% end %>  
+        <% end %>
+        </ul>
+      <% end %>
+
+
+      <h2>Your Friends, choose what you want to delete</h2>
+  <ul>
+  <% if current_user.friend_id? %>
+    <% for friendships in @user.friendships %>
+    <li>
+    <%= h friendship.friend.Username %>
+    (<%= link_to "remove", friendship, :method => :delete %>)
+    </li>
+    <% end %>  
+  <% else %>
+    <p> dont have friends </p>
+  <% end %>
+  </ul>
+<% end %>

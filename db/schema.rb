@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_11_093542) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_15_134610) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -49,6 +49,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_11_093542) do
     t.string "Username"
     t.index ["note_id"], name: "index_collection_notes_on_note_id"
     t.index ["user_id"], name: "index_collection_notes_on_user_id"
+  end
+
+  create_table "collections", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.string "topic"
+    t.integer "notes_id"
+    t.integer "user_id"
+    t.index ["notes_id"], name: "index_collections_on_notes_id"
+    t.index ["user_id"], name: "index_collections_on_user_id"
   end
 
   create_table "friends", force: :cascade do |t|
@@ -96,6 +107,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_11_093542) do
     t.string "image"
     t.integer "user_id", null: false
     t.boolean "share"
+    t.integer "share_id"
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 

@@ -2,56 +2,40 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Notes</h1>
-
- <% if current_user.admin? %>
  <h1>List of Notes</h1>
- <%= render :template => 'notes/search_menu' -%>
+<%= render :template => 'notes/search_menu' -%>
 
 <table class="table table-striped table-bordered">
   <thead class="thead-dark">
   <thead>
     <tr>
-    <th scope="col">Owner</th>
+      <th scope="col">User id</th>  
       <th scope="col">Title</th>
-      <th scope="col">Topic</th>
+      <th scope="col">TOpic</th>
       <th scope="col">Description</th>
       <th scope="col">Image</th>
-      <th scope="col">Share_person</th>
-
       <th scope="col">Share</th>
     </tr>
   </thead>
   <tbody>
-      <% @notes.each do |note| %>
+     <% @notes.each do |note| %>
+     <% if note.user_id == current_user.id%>
+      <tr>
         <td><%= note.user_id %></td>
         <td><%= note.title %></td>
         <td><%= note.topic %></td>
         <td><%= note.description %></td>
-         <td>
-          <% if note.image? %>
-            <div class="gallery">
-            <%= image_tag url_for(note.image.url) %>
-            </div>
-          <% end %>
-        </td>
+        <td><%= note.image %></td>
         <td><%= note.share_id %></td>
         <td><%= link_to "Edit this note",  edit_note_path(note) %>  </td>
         <td><%= link_to "Show this note", note %>  </td>
         <td><%= link_to "remove", note, :method => :delete, turbo_confirm: "Are you sure?"  %>
      </td>
-      </tr>
+      </tr>  
     <% end %>
+<% end %>
   </tbody>
 </table>
 
-<% else %>
-<li class="nav-item active">
-          <a>  <%= link_to " Go to see your own notes", own_notes_path %> </a>
-        </li>
-        <li class="nav-item active">
-          <a>  <%= link_to " Go to see your shared notes", friends_notes_path %> </a>
-        </li>
-        <li class="nav-item active">
-          <a> <%= link_to "notes", collections_path %></a>
-        </li>
- <% end %>       
+
+<%= render :template => 'notes/back' -%>

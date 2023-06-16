@@ -25,11 +25,8 @@ class CollectionNotesController < ApplicationController
 
   # GET /collection_notes/1 or /collection_notes/1.json
   def show
-    @Collection_note = CollectionNote.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @Collection_note }
+    @collection = Collection.find(params[:id])
+    @products = @collection.products
     end
   end
 

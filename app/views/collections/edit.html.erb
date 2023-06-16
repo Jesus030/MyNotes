@@ -1,0 +1,44 @@
+<%= render :template => 'dashboard/index' -%>
+<p style="color: green"><%= notice %></p>
+<h1>Editing collection</h1>
+
+<%= render "form", collection: @collection %>
+
+<br>
+
+<div>
+<h1>List of notes of collection </h1>
+<table class="table table-striped table-bordered">
+  <thead class="thead-dark">
+  <thead>
+    <tr>
+      <th scope="col">User id</th>  
+      <th scope="col">Title</th>
+      <th scope="col">TOpic</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+     <% @notes.each do |note| %>
+       <%@collection.notes%>
+     <% if note == @collection.notes%>
+      <%@collection.notes%>
+      <tr>
+
+        <td><%= note.title %></td>
+        <td><%= note.topic %></td>
+        <td><%= note.description %></td>
+       <td> <%= link_to 'Take off Note', remove_from_collection_path(id: @collection.id, note_id: note.id), method: :post %> </td>
+ <td> <%= link_to "Add notes to collection", @collection %>    </td>
+        
+      
+      </tr>  
+    <% end %>
+<% end %>
+  </tbody>
+</table> 
+
+ 
+</div>
+ <%= button_to "Destroy this collection", @collection, method: :delete %>
+<%= render :template => 'collections/back' -%> 

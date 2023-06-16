@@ -20,11 +20,11 @@
     <%= form.label :zip, style: "display: block" %>
     <%= form.text_field :zip %>
   </div>
-
+  <% if current_user.admin?%> 
   <div>
     <%= form.label :role, style: "display: block" %>
       <%= form.select :role, [["Administrator","admin"], ["User","user"]], selected: "User" %>
-
+  <% end %>
   </div>
 
 <div>

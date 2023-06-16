@@ -9,8 +9,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :notes
-  has_many :relation_notes_collection
-  has_many :notes, through: :relation_notes_collection
+  attr_accessor :notes_id
   before_create :generate_authentication_token
   
   attr_accessor :authentication_token

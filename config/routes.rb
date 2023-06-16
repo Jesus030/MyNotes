@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :collection_notes
+  resources :collections
   resources :notes
   resources :image
   #devise_for :users, controllers: { sessions: 'custom_session' }
@@ -10,8 +10,26 @@ Rails.application.routes.draw do
       post :send_friend_request
     end
   end
-    
-  post 'collections/:id/add_note', to: 'collections#add_note', as: 'add_note_collection'
+  
+  get '/ver_notas', to: 'notes#ver_notas', as: 'ver_notas'
+  get '/ver_notas_title', to: 'notes#ver_notas_title', as: 'ver_notas_title'
+
+  get '/friends_notes', to: 'notes#friends_notes', as: 'friends_notes'
+  get '/own_notes', to: 'notes#own_notes', as: 'own_notes'
+  get '/your_friends', to: 'friendship#your_friends'
+  get '/share_notes', to: 'notes#share_notes', as:  'share_note'
+ 
+  #get '/collection_notes_add_note', to: 'collection_notes#add_note', as: 'add_note'
+  get '/add_note', to: 'collections#add_note', as: 'add_note'
+ # post 'add_note/:index', to: 'collections#add_note', as: 'add_note'
+ # get '/remove_from_collection', to: 'notes#remove_from_collection', as: 'remove_from_collection'
+
+ resources :collections do
+  #post 'add_note/:index', to: 'collections#add_note', as: 'add_note'
+ # post 'add_note', to: 'collections#add_note', as: 'add_note'
+end
+
+
   get 'friendship/request', as: :friend
   post 'friendship/index',  as: :friendships
   get '/friendship/index', to: 'friendship#index'

@@ -9,7 +9,18 @@
  * compiled file so the styles you add here take precedence over styles defined in any other CSS
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
  */
+ .gallery img {
+  width: 300px;
+  height: 300px;
+}
+ @import "bootstrap";
+ table th {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+ .select2-large {
+    height: 100px; /* Cambia el valor según tus necesidades */
+    font-size: 15px; /* Cambia el valor según tus necesidades */
+  }

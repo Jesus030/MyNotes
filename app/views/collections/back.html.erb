@@ -1,26 +1,16 @@
-<!DOCTYPE html>
 <html>
 <head>
-<%= render :template => 'dashboard/index' -%>
   <div class="container mt-4">
     <%= yield %>
   </div>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-AtgzuAEM/bszXZfzmfsMfVQ1xCwrGBQZeQD5YC7UhqG6o+rYHQv0scj6+D457uZp" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
- <p style="color: green"><%= notice %></p>
   <li class="nav-item active">
-          <a>  <%= link_to " Go to users", users_path %> </a>
+          <a> <%= link_to "collections", collections_path %>
         </li>
         <li class="nav-item active">
-         <a>  <%= link_to " Go to notes", notes_path %> </a>
+         <a>  <%= link_to "New note", new_collection_path %>
         </li>
-        <a>
-           <li class="nav-item active">
-        <%= link_to " logout", destroy_user_session_path, method: :delete  %>
-         </li>
-        <a>
   </body>
 </html>
-  
-

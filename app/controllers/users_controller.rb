@@ -24,9 +24,9 @@ class UsersController < ApplicationController
   end
 
 def create_friendshid
-@user=User.find(params[:id])
-current_user.send_friend_request(@user)
-redirect_to @user
+  @user=User.find(params[:id])
+  current_user.send_friend_request(@user)
+  redirect_to @user
 
 end
 

@@ -32,9 +32,9 @@
 
   
   <div>
-    <%= form.label :share, style: "display: block" %>
-    <%= form.select :share, [["Yes","True"], ["No","False"]], selected: "Yes" %>
-  </div>
+  <%= form.label :share_id, style: "display: block" %>
+  <%= form.select :share_id, options_from_collection_for_select(User.all, :id, :Username ){} %>
+</div>
 
   <div>
     <%= form.submit %>

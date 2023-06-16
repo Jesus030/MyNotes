@@ -4,8 +4,18 @@ class NotesController < ApplicationController
   # GET /notes or /notes.json
   def index
     @notes = Note.all
+   
   end
 
+  def own_notes
+    @notes = Note.all
+  end
+
+  def friends_notes
+    @notes = Note.all
+  end
+
+  
   # GET /notes/1 or /notes/1.json
   def show
   end
@@ -20,13 +30,28 @@ class NotesController < ApplicationController
   def edit
   end
 
-  def remove_from_collection
-    @collection_note = Collection_note.find(params[:collection_id])
+   
+
+  def ver_notas
+    @topic = params[:topic]  # lee el parámetro 'tema' pasado por el usuario
+    @notes = Note.where(topic: @topic)  # filtra las notas por el tema especificado
+
+  end
+
+  def ver_notas_title
+    @title = params[:title]  # lee el parámetro 'tema' pasado por el usuario
+    @notes = Note.where(title: @title)  # filtra las notas por el tema especificado
+
+  end
+
+  def share
+   
     @note = Note.find(params[:id])
-    @collection_note.notes.delete(@note)
-    
-    redirect_to @collection_note
+   @note.share_id=2
+    @note.save
+    redirect_to @note
   end    
+
 
   # POST /notes or /notes.json
   def create
@@ -77,6 +102,6 @@ class NotesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def note_params
-      params.require(:note).permit(:user_id, :title, :topic, :image, :description)
+      params.require(:note).permit(:user_id, :title, :topic, :image, :description, :share_id)
     end
 end

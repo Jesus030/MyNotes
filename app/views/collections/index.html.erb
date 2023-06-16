@@ -1,0 +1,67 @@
+<%= render :template => 'dashboard/index' -%>
+<p style="color: green"><%= notice %></p>
+
+<h1>Collections</h1>
+
+ <% if current_user.admin? %>
+ <h1>List of collections</h1>
+<table class="table table-striped table-bordered">
+  <thead class="thead-dark">
+  <thead>
+    <tr>
+    <th scope="col">Owner</th>
+      <th scope="col">Title</th>
+      <th scope="col">Topic</th>
+      <th scope="col">List notes</th>
+      <th scope="col">Add notes</th>
+    </tr>
+  </thead>
+  <tbody>
+      <% @collections.each do |collection| %>
+        <td><%= collection.user_id%></td>
+        <td><%= collection.title %></td>
+        <td><%= collection.topic %></td>
+        <td>
+    
+        </td>
+        <td><%= link_to "Edit this collection",  edit_collection_path(collection) %>  </td>
+        <td><%= link_to "Show this collection", collection %>  </td>
+        <td><%= link_to "remove", collection, :method => :delete, turbo_confirm: "Are you sure?"  %>
+     </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% else %>     
+ <% if current_user.user? %>
+<table class="table table-striped table-bordered">
+  <thead class="thead-dark">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Topic</th>
+      <th scope="col">List notes</th>
+      <th scope="col">Add notes</th>
+    </tr>
+  </thead>
+  <tbody>
+     <% @collections.each do |collection| %>
+     <% if collection.user== current_user%>
+      <tr>
+        <td><%= collection.title %></td>
+        <td><%= collection.topic %></td>
+        <td><%= link_to "Edit this collection",  edit_collection_path(collection) %>  </td>
+        <td><%= link_to "Show this collection", collection %>  </td>
+        <td><%= link_to "remove", collection, :method => :delete, turbo_confirm: "Are you sure?"  %>
+     </td>
+      </tr>  
+    <% end %>
+<% end %>
+<% end %>
+  </tbody>
+</table>
+<% end %>
+
+<%= link_to "New collection", new_collection_path %>
+<%= render :template => 'collections/back' -%>  

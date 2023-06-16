@@ -1,11 +1,13 @@
+<%= render :template => 'dashboard/index' -%>
 <p style="color: green"><%= notice %></p>
 
 <%= render @note %>
 
 <div>
-  <%= link_to "Edit this note", edit_note_path(@note) %> |
-  <%= link_to "Back to notes", notes_path %>
+  <%= link_to "Share ", share_note_path %>
 
   <%= button_to "Destroy this note", @note, method: :delete %>
 </div>
+
+<%= render :template => 'notes/back' -%>
 <%= link_to "Log out", destroy_user_session_path, class: 'nav-link', data: {turbo_method: :delete} %>

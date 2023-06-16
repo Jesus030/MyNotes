@@ -1,0 +1,9 @@
+<%= render :template => 'dashboard/index' -%>
+<p style="color: green"><%= notice %></p>
+<h1>New collection</h1>
+
+<%= render "form", collection: @collection %>
+
+<br>
+
+<%= render :template => 'collections/back' -%> 

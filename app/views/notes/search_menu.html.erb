@@ -1,0 +1,11 @@
+<%= form_tag ver_notas_title_path(:title), method: :get do %>
+  <%= label_tag :title, "Shearch by title:" %>
+  <%= text_field_tag :title, params[:title] %>
+  <%= submit_tag "Shearch" %>
+<% end %>
+
+<%= form_tag ver_notas_path(:topic), method: :get do %>
+  <%= label_tag :topic, "Shearch:" %>
+  <%= select_tag  :topic,  options_for_select([["Homework","Homework"], ["Shop","Shop"],["Sports","Sports"],["University","University"]], selected: "University")%>
+  <%= submit_tag "Shearch" %>
+<% end %>

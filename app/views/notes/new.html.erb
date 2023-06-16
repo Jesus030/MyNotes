@@ -1,3 +1,4 @@
+<%= render :template => 'dashboard/index' -%>
 <h1>New note</h1>
 
 <%= render "form", note: @note %>
@@ -7,4 +8,7 @@
 <div>
   <%= link_to "Back to notes", notes_path(current_user) %>
 </div>
+
+<%= render :template => 'notes/back' -%>
+
 <%= link_to "Log out", destroy_user_session_path, class: 'nav-link', data: {turbo_method: :delete} %>

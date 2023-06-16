@@ -1,0 +1,8 @@
+<%= render :template => 'dashboard/index' -%>
+
+<div>
+  <%= form.label :user style: "display: block" %>
+  <%= form.select :share_user_id, options_from_collection_for_select(User.all, :id, :username )  {}, {include_blank: false}, {multiple: true,   class: "select2-large"} %>
+</div>
+
+<%= render :template => 'notes/back' -%>

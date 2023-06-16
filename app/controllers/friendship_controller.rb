@@ -5,6 +5,24 @@ def index
   @accepted_friendships= current_user.friends
 end
 
+def your_friends
+  @users = User.all
+  @pending_friendships =current_user.pending_friends
+  @accepted_friendships= current_user.friends
+end
+
+def possible_friends
+  @users = User.all
+  @pending_friendships =current_user.pending_friends
+  @accepted_friendships= current_user.friends
+end
+
+def send_friend_request
+  @users = User.all
+  @pending_friendships =current_user.pending_friends
+  @accepted_friendships= current_user.friends
+end
+
   def create
     friend = User.find(params[:friend_id])
         @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
