@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_16_013450) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_16_103428) do
+  create_table "Share_notes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "notes_id", null: false
+    t.integer "users_id", null: false
+    t.index ["notes_id"], name: "index_Share_notes_on_notes_id"
+    t.index ["users_id"], name: "index_Share_notes_on_users_id"
+  end
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -151,6 +160,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_16_013450) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "Share_notes", "notes", column: "notes_id"
+  add_foreign_key "Share_notes", "users", column: "users_id"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "collection_notes", "notes"

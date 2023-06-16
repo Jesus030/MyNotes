@@ -1,6 +1,7 @@
 <%= render :template => 'dashboard/index' -%>
 <p style="color: green"><%= notice %></p>
-<h1>List of notes to add </h1>
+<div>
+<h1>List of notes of collection </h1>
 <table class="table table-striped table-bordered">
   <thead class="thead-dark">
   <thead>
@@ -12,20 +13,15 @@
     </tr>
   </thead>
   <tbody>
-     <% @notes.each do |note| %>
-     <% if note.user_id == current_user.id %>
+  <% @collection.notes.each do |note| %>
       <tr>
-        <% render @collection%>
         <td><%= note.title %></td>
         <td><%= note.topic %></td>
         <td><%= note.description %></td>
-       <td> <%= link_to 'Add Note', add_note_path(id: @collection.id, note_id: note.id), method: :post %> </td>
-          
-      </tr>  
-    <% end %>
+        </tr>  
 <% end %>
   </tbody>
-</table>
+</table> 
 <%= render :template => 'collections/back' -%> 
 
 <div>

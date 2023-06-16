@@ -28,6 +28,7 @@ class NotesController < ApplicationController
 
   # GET /notes/1/edit
   def edit
+    @users=User.all
   end
 
   def ver_notas
@@ -41,12 +42,24 @@ class NotesController < ApplicationController
     @notes = Note.where(title: @title)  # filtra las notas por el tema especificado
 
   end
-
-  def share    
-    @note = Note.find(params[:id])
-   @note.share_id=2
-    @note.user << @user
-    redirect_to @note
+def share_user  
+  @share_notes = ShareNote.new
+  @share_notes.save
+  @user = User.find(params[:user_id])
+  @note = Note.find(params[:note_id])
+  @share_notes.users_id << @user
+  @share_notes.notes_id << @note
+  
+  redirect_to edit_note_path(@note)
+end
+  def  remove_from_sharing 
+  
+  @user = User.find(params[:user_id])
+  @note = Note.find(params[:note_id])
+  @share_notes.notes_id.delete(@note)
+  @share_notes.users_id.delete(@user)
+    
+    redirect_to edit_note_path(@note)
   end    
 
 

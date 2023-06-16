@@ -4,11 +4,51 @@
 <%= render "form", note: @note %>
 
 <br>
+<h1>List of user to not sharing your note </h1>
+<table class="table table-striped table-bordered">
+  <thead class="thead-dark">
+  <thead>
+    <tr>
+      <th scope="col">User id</th>  
+      <th scope="col">Title</th>
+      <th scope="col">Topic</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+      <tr>
+        <td><%= user.Username %></td>
+       <td> <%= link_to 'Remove sharing', remove_from_sharing_path(note_id: @note.id, user_id: user.id), method: :post %> </td>
+      </tr>  
+    <% end %>
+  </tbody>
+</table> 
+<h1>Users to share your notes </h1>
+<table class="table table-striped table-bordered">
+  <thead class="thead-dark">
+  <thead>
+    <tr>
+      <th scope="col">User id</th>  
+      <th scope="col">Title</th>
+      <th scope="col">TOpic</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+     <% @users.each do |user| %>
+      <tr>
+        <td><%= user.Username %></td>
+       <td> <%= link_to 'Share Note', share_user_path(note_id: @note.id, user_id: user.id), method: :post %> </td>
+          
+      </tr>  
+    <% end %>
 
-
+  </tbody>
+</table>
 
 <div>
-  <%= link_to "Show this note", @note %> |
+
   <%= link_to "Back to notes", notes_path %>
 </div>
 <%= render :template => 'notes/back' -%>

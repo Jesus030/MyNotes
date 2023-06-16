@@ -4,11 +4,75 @@
           <a>  <%= link_to " Go to see your friends or delete ot", your_friends_path %> </a>
         </li>
         <li class="nav-item active">
-         <a>  <%= link_to " Send petitions", possibles_friends_path %> </a>
+         <a>  <%= link_to " Send petitions", possible_friends_path %> </a>
         </li>
        <li class="nav-item active">
-         <a>  <%= link_to " Accept petitions", send_request_path %> </a>
+         <a>  <%= link_to " Accept petitions", request_path %> </a>
         </li>
+        
+<h1>Your friends</h1>
+  <% if current_user.friend_id?%> 
+    <h2>Your Friends</h2>
+      <% @users.each do |user| %>
+        <% if current_user.id == user.friend_id %>
+        <ul>
+          <% for user in @user.friends %>
+           <li><%= h user.Username %></li>
+          <% end %>  
+        <% end %>
+        </ul>
+      <% end %>
+
+
+      <h2>Your Friends, choose what you want to delete</h2>
+  <ul>
+  <% if current_user.friend_id? %>
+    <% for friendships in @user.friendships %>
+    <li>
+    <%= h friendship.friend.Username %>
+    (<%= link_to "remove", friendship, :method => :delete %>)
+    </li>
+    <% end %>  
+  <% else %>
+    <p> dont have friends </p>
+  <% end %>
+  </ul>
+<% end %>
+
+<h2>Possible friends to take, choose user to send a request</h2>
+    <% @users.each do |user| %>
+      <div class="user">
+      <p>
+      <strong><%=h user.Username %></strong>
+      <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %>
+      <div class="clear"></div>
+      </p>
+      <% if current_user!= user && !current_user.friends.include?(user) %>
+        <% if current_user.pending_friends.include?(user) %>
+          <%= button_to "send request", send_friend_request_user_path(user), method: :post %>
+        <% end %>
+        <% else %>
+          <%= button_to "delete friend", "#", disabled: true%>
+        <% end %>
+      <% end %>
+      </div>
+
+
+
+  <h2>Users Who Have Befriended You</h2>
+  <ul>
+  <% if @user && @user.inverse_friends? %>
+    <% for user in @user.inverse_friends %>
+      <li><%= h user.Username %></li>
+    <% end %>
+  <% if friendships.inverse_friend? %>
+    <li><%= h user.Username %></li>
+  <% else %>
+  <% end %>
+    <p> nobody wants to be your friend </p>
+  <% end %>
+  </ul>
+
 
    <% if current_user.admin?%> 
       <h2>welcome admin, choose friends to delete</h2>

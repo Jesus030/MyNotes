@@ -31,7 +31,12 @@
     <%= form.label :Password, style: "display: block" %>
     <%= form.text_field :password %>
   </div>
-
+<% if current_user.admin?%>
+<div>
+  <%= form.label :friendid, style: "display: block" %>
+  <%= form.select :friend_id, options_from_collection_for_select(User.all, :id, :Username ){} %>
+</div>
+<% end %>
   <div>
     <%= form.submit %>
   </div>

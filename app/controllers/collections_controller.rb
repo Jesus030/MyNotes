@@ -16,7 +16,7 @@ class CollectionsController < ApplicationController
     @note = Note.find(params[:note_id])
     @collection.notes << @note
     
-    redirect_to collection_path(@collection)
+    redirect_to edit_collection_path(@collection)
     end
 
     def remove_from_collection
@@ -24,7 +24,7 @@ class CollectionsController < ApplicationController
       @note = Note.find(params[:note_id])
       @collection.notes.delete(@note)
       
-      redirect_to collection_path(@collection)
+      redirect_to edit_collection_path(@collection)
     end    
 
   # GET /collections/1 or /collections/1.json

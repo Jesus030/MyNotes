@@ -1,0 +1,2 @@
+class ShareNote < ApplicationRecord
+end
