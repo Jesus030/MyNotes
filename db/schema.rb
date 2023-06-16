@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_15_134610) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_16_013450) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -108,6 +108,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_15_134610) do
     t.integer "user_id", null: false
     t.boolean "share"
     t.integer "share_id"
+    t.integer "collection_id"
+    t.index ["collection_id"], name: "index_notes_on_collection_id"
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
@@ -153,6 +155,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_15_134610) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "collection_notes", "notes"
   add_foreign_key "collection_notes", "users"
+  add_foreign_key "notes", "collections"
   add_foreign_key "notes", "users"
   add_foreign_key "relation_notes_collections", "notes"
   add_foreign_key "relation_notes_collections", "users"

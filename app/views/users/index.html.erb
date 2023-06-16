@@ -23,8 +23,7 @@
         <td><%= user.role %></td>
         <td><%= link_to "List friends", friendships_path(@user) %><td>
         <td><%= link_to "Edit this user", edit_user_path(user) %> | </td>
-        <td><%= link_to "remove", user, :method => :delete, turbo_confirm: "Are you sure?"  %>
-     </td>
+        <td><%= link_to "remove", user, :method => :delete, turbo_confirm: "Are you sure?"  %></td>
       </tr>
     <% end %>
   </tbody>

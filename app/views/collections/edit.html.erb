@@ -19,21 +19,13 @@
     </tr>
   </thead>
   <tbody>
-     <% @notes.each do |note| %>
-       <%@collection.notes%>
-     <% if note == @collection.notes%>
-      <%@collection.notes%>
+  <% @collection.notes.each do |note| %>
       <tr>
-
         <td><%= note.title %></td>
         <td><%= note.topic %></td>
         <td><%= note.description %></td>
        <td> <%= link_to 'Take off Note', remove_from_collection_path(id: @collection.id, note_id: note.id), method: :post %> </td>
- <td> <%= link_to "Add notes to collection", @collection %>    </td>
-        
-      
       </tr>  
-    <% end %>
 <% end %>
   </tbody>
 </table> 

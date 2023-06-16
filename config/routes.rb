@@ -21,8 +21,9 @@ Rails.application.routes.draw do
  
   #get '/collection_notes_add_note', to: 'collection_notes#add_note', as: 'add_note'
   get '/add_note', to: 'collections#add_note', as: 'add_note'
+  get '/add',  to: 'collections#add', as: 'add'
  # post 'add_note/:index', to: 'collections#add_note', as: 'add_note'
- # get '/remove_from_collection', to: 'notes#remove_from_collection', as: 'remove_from_collection'
+  get '/remove_from_collection', to: 'collections#remove_from_collection', as: 'remove_from_collection'
 
  resources :collections do
   #post 'add_note/:index', to: 'collections#add_note', as: 'add_note'

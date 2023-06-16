@@ -3,11 +3,5 @@
 
 <%= render "form", user: @user %>
 
-<br>
-
-<div>
-  <%= link_to "Back to users", users_path %>
-</div>
 
 
-<%= button_to "logout", destroy_user_session_path, method: :delete  %>

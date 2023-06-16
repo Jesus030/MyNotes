@@ -30,8 +30,6 @@ class NotesController < ApplicationController
   def edit
   end
 
-   
-
   def ver_notas
     @topic = params[:topic]  # lee el parámetro 'tema' pasado por el usuario
     @notes = Note.where(topic: @topic)  # filtra las notas por el tema especificado
@@ -44,11 +42,10 @@ class NotesController < ApplicationController
 
   end
 
-  def share
-   
+  def share    
     @note = Note.find(params[:id])
    @note.share_id=2
-    @note.save
+    @note.user << @user
     redirect_to @note
   end    
 

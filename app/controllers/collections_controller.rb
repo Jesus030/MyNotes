@@ -6,13 +6,17 @@ class CollectionsController < ApplicationController
     @collections = Collection.all
     
   end
+  def add
+    @collections = Collection.all
+    @notes = Note.all
+  end
 
   def add_note
     @collection = Collection.find(params[:id])
     @note = Note.find(params[:note_id])
     @collection.notes << @note
     
-    render @collection
+    redirect_to collection_path(@collection)
     end
 
     def remove_from_collection
@@ -20,10 +24,12 @@ class CollectionsController < ApplicationController
       @note = Note.find(params[:note_id])
       @collection.notes.delete(@note)
       
+      redirect_to collection_path(@collection)
     end    
+
   # GET /collections/1 or /collections/1.json
   def show
-    @collections = Collection.all
+   
     @notes = Note.all
   end
 
@@ -68,7 +74,10 @@ class CollectionsController < ApplicationController
 
   # DELETE /collections/1 or /collections/1.json
   def destroy
-    @collection.destroy
+    @coleccion = Coleccion.find(params[:id])
+    @coleccion.notas.destroy_all 
+    @coleccion.destroy
+
 
     respond_to do |format|
       format.html { redirect_to collections_url, notice: "Collection was successfully destroyed." }

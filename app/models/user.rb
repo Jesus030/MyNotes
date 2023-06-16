@@ -8,7 +8,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, 
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :notes
+  has_many :notes, dependent: :destroy
+  has_many :colecciones, dependent: :destroy
   attr_accessor :notes_id
   before_create :generate_authentication_token
   

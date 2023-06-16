@@ -15,11 +15,10 @@
      <% @notes.each do |note| %>
      <% if note.user_id == current_user.id %>
       <tr>
-        <% render @collection%>
         <td><%= note.title %></td>
         <td><%= note.topic %></td>
         <td><%= note.description %></td>
-       <td> <%= link_to 'Add Note', add_note_path(id: @collection.id, note_id: note.id), method: :post %> </td>
+       <td> <%= link_to 'Add Note', add_note_path(id: @collection.id,note_id: note.id), method: :post %> </td>
           
       </tr>  
     <% end %>
